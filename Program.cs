@@ -22,8 +22,20 @@ class Program
     //create a team with 3 characters
     static Team CreateTeam(int teamNumber)
     {
-        Console.Write($"\nEnter name for Team {teamNumber}: ");
-        string teamName = Console.ReadLine(); //readline not writeline because it waits for the user to something and then press enter 
+        string teamName;
+
+        //validate team name
+        while (true)
+        {
+            Console.Write($"\nEnter name for Team {teamNumber}: ");
+            teamName = Console.ReadLine()?.Trim();
+
+            if (!string.IsNullOrEmpty(teamName))
+                break;
+
+            Console.WriteLine("Team name cannot be empty. Please enter a valid name.");
+        }
+
         var team = new Team(teamName);
 
         for (int i = 1; i <= 3; i++)
@@ -42,9 +54,19 @@ class Program
                 Console.WriteLine("Invalid choice. Please enter Fighter, Wizard, or Cleric.");
             }
 
-            //ask for character name
-            Console.Write($"Enter name for this {choice}: ");
-            string charName = Console.ReadLine();
+            string charName;
+
+            //validate character name
+            while (true)
+            {
+                Console.Write($"Enter name for this {choice}: ");
+                charName = Console.ReadLine()?.Trim();
+
+                if (!string.IsNullOrEmpty(charName))
+                    break;
+
+                Console.WriteLine("Character name cannot be empty. Please enter a valid name.");
+            }
 
             //create character based on validated choice
             switch (choice)
