@@ -1,0 +1,22 @@
+# Build output
+bin/
+obj/
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+.vscode/
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+*.nupkg
+*.snupkg
+packages/
+
+*.tmp
+*.temp
