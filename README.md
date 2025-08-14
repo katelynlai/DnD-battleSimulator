@@ -36,8 +36,23 @@ The battle alternates turns:
 
 Characters with 0 HP are displayed as DEAD
 
+## Battle Simulation Details
+1. Turn Order
+    - Teams alternate turns automatically.
+    - Each living member of the active team attacks a random living member of the opposing team.
+
+2. Character Behavior
+    - Fighters deal damage equal to their attack.
+    - Wizards deal double damage but lose 1 health per attack.
+    - Clerics deal damage and heal themselves for 1 HP when attacking.
+
+3. Battle Outcome
+    - The battle ends when all members of one team are dead.
+    - If all characters from both teams die simultaneously, the battle is declared a draw.
+    - After each turn, the health status of all characters is displayed.
+
 ## Assumptions
 - The battle order is automatic; users do not select attack targets.
-- Input validation ensures only Fighter, Wizard, or Cleric can be chosen.
+- Clerics can exceed their starting health due to self-healing.
 - Health and attack values are randomly generated (1–10) on character creation.
-- Dead characters are displayed as "DEAD" in the console.
+- Dead characters cannot attack.
