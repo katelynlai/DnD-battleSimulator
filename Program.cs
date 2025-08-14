@@ -8,23 +8,35 @@ class Program
     {
         Console.WriteLine("Welcome to the DnD Battler!");
 
-        //create Team 1
-        var team1 = CreateTeam(1);
+        bool playAgain = true;
 
-        //create Team 2
-        var team2 = CreateTeam(2);
+        while (playAgain)
+        {
+            // Create Team 1
+            var team1 = CreateTeam(1);
 
-        //start battle
-        var battle = new Battle(team1, team2);
-        battle.Simulate();
+            // Create Team 2
+            var team2 = CreateTeam(2);
+
+            // Start battle
+            var battle = new Battle(team1, team2);
+            battle.Simulate();
+
+            // Replay option
+            Console.WriteLine("\nDo you want to play again? (Y/N):");
+            string replayChoice = Console.ReadLine()?.Trim().ToLower();
+            playAgain = replayChoice == "y" || replayChoice == "yes";
+        }
+
+        Console.WriteLine("\nThanks for playing DnD Battler!");
     }
 
-    //create a team with 3 characters
+    // Create a team with 3 characters
     static Team CreateTeam(int teamNumber)
     {
         string teamName;
 
-        //validate team name
+        // Validate team name
         while (true)
         {
             Console.Write($"\nEnter name for Team {teamNumber}: ");
@@ -42,21 +54,35 @@ class Program
         {
             string choice = "";
 
-            //check for valid character type
+            // Check for valid character type
             while (true)
             {
-                Console.WriteLine($"Choose character {i} for {teamName} (Fighter/Wizard/Cleric):");
+                Console.WriteLine($"Choose character {i} for {teamName} (Fighter[F]/Wizard[W]/Cleric[C]):");
                 choice = Console.ReadLine().Trim().ToLower();
 
-                if (choice == "fighter" || choice == "wizard" || choice == "cleric")
-                    break; //valid input, exit loop
+                // Allow both full names and shortcuts
+                if (choice == "fighter" || choice == "f")
+                {
+                    choice = "fighter";
+                    break;
+                }
+                else if (choice == "wizard" || choice == "w")
+                {
+                    choice = "wizard";
+                    break;
+                }
+                else if (choice == "cleric" || choice == "c")
+                {
+                    choice = "cleric";
+                    break;
+                }
 
-                Console.WriteLine("Invalid choice. Please enter Fighter, Wizard, or Cleric.");
+                Console.WriteLine("Invalid choice. Please enter Fighter (F), Wizard (W), or Cleric (C).");
             }
 
             string charName;
 
-            //validate character name
+            // Validate character name
             while (true)
             {
                 Console.Write($"Enter name for this {choice}: ");
@@ -68,7 +94,7 @@ class Program
                 Console.WriteLine("Character name cannot be empty. Please enter a valid name.");
             }
 
-            //create character based on validated choice
+            // Create character based on validated choice
             switch (choice)
             {
                 case "fighter":
